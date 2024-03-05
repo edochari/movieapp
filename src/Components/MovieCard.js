@@ -1,19 +1,7 @@
 import {Component} from "react";
-import "../index.css";
+import "../CSS/index.css";
 class MovieCard extends Component{
-    constructor()
-    {
-        super();
-        this.state={
-            title:"The Avengers",
-            plot:"All have super powers",
-            price:"199",
-            rating:"8.5",
-            stars:0,
-            favourite:false,
-            isInCart:false,
-        }
-    }
+   
 
     addStars(){
         if(this.state.stars>=5)
@@ -45,7 +33,8 @@ class MovieCard extends Component{
 
     }
     render(){
-        const {title,plot,price,rating,stars,favourite,isInCart}=this.state;
+        const {movies}=this.props;
+        const {title,plot,price,rating,star,fav,isInCart}=movies;
         return (
             <div className="main">
                 <div className="movie-card">
@@ -59,14 +48,14 @@ class MovieCard extends Component{
                         <div className="footer">
                             <div className="rating">{rating}</div>
                             <div className="star-dis">
-                                <img src="https://cdn-icons-png.flaticon.com/128/2732/2732689.png" className="str-btn" onClick={this.decreaseStars} alt="increase" />
+                                <img src="https://cdn-icons-png.flaticon.com/128/2732/2732689.png" className="str-btn" onClick={()=>this.props.decreaseStars(this.props.movies)} alt="increase" />
                                 <img className="stars" src="https://cdn-icons-png.flaticon.com/128/616/616489.png" alt="stars" />
-                                <img src="https://cdn-icons-png.flaticon.com/128/149/149705.png" className="str-btn" onClick={this.addStars.bind(this)} alt="increase" />
-                                <span>{stars}</span>
+                                <img src="https://cdn-icons-png.flaticon.com/128/149/149705.png" className="str-btn" onClick={()=>this.props.addStars(this.props.movies)} alt="increase" />
+                                <span>{star}</span>
                             </div>
                             
-                            <button className={favourite?"unfavourite-btn":"favourite-btn"} onClick={this.toggleFavourite}>{favourite?"Unfavourite":"favourite"}</button>
-                            <button className={isInCart?"remove-cart-btn":"cart-btn"} onClick={this.toggleCartBtn.bind(this)}>{isInCart?"Remove":"Add to Cart"}</button>
+                            <button className={fav?"unfavourite-btn":"favourite-btn"} onClick={()=>this.props.toggleButtons("favourite",movies)}>{fav?"Unfavourite":"favourite"}</button>
+                            <button className={isInCart?"remove-cart-btn":"cart-btn"} onClick={()=>this.props.toggleButtons("cart",movies)}>{isInCart?"Remove":"Add to Cart"}</button>
                         </div>
                     </div>
                 </div>
