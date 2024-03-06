@@ -33,7 +33,7 @@ class MovieCard extends Component{
 
     }
     render(){
-        const {movies}=this.props;
+        let {movies,cartCounter,toggleFavourite}=this.props;
         const {title,plot,price,rating,star,fav,isInCart}=movies;
         return (
             <div className="main">
@@ -54,8 +54,8 @@ class MovieCard extends Component{
                                 <span>{star}</span>
                             </div>
                             
-                            <button className={fav?"unfavourite-btn":"favourite-btn"} onClick={()=>this.props.toggleButtons("favourite",movies)}>{fav?"Unfavourite":"favourite"}</button>
-                            <button className={isInCart?"remove-cart-btn":"cart-btn"} onClick={()=>this.props.toggleButtons("cart",movies)}>{isInCart?"Remove":"Add to Cart"}</button>
+                            <button className={fav?"unfavourite-btn":"favourite-btn"} onClick={()=>toggleFavourite(movies)}>{fav?"Unfavourite":"favourite"}</button>
+                            <button className={isInCart?"remove-cart-btn":"cart-btn"} onClick={()=>cartCounter(movies)}>{isInCart?"Remove From Cart":"Add to Cart"}</button>
                         </div>
                     </div>
                 </div>

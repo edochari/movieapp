@@ -2,7 +2,7 @@
 import Navbar from "./Navbar";
 import MovieList from "./MovieList";
 import React from "react";
-import {movies} from "../Data/MovieData";
+import {movies} from "../Data/MovieData.js";
 
 class App extends React.Component {
 
@@ -10,7 +10,8 @@ class App extends React.Component {
   {
       super();
       this.state={
-         
+         movies:movies,
+         cartCount:0,
       }
   }
   
@@ -62,11 +63,60 @@ class App extends React.Component {
  
 
 }
+
+handleCartCount=(movie)=>{
+  let {movies,cartCount}=this.state;
+  let mid=movies.indexOf(movie);
+  
+  if(movies[mid].isInCart===true)
+  {
+    movies[mid].isInCart=false;
+    cartCount -= 1;
+  }
+  else
+  {
+    movies[mid].isInCart=true;
+    cartCount+=1;
+  }
+  
+  this.setState({
+    movies:movies,
+    cartCount:cartCount
+   })
+
+
+}
+handleFavourite=(movie)=>{
+  let {movies,cartCount}=this.state;
+  let mid=movies.indexOf(movie);
+  
+  if(movies[mid].fav===true)
+  {
+    movies[mid].fav=false;
+    
+  }
+  else
+  {
+    movies[mid].fav=true;
+    
+  }
+  
+  this.setState({
+    movies:movies,
+    
+   })
+  }
 render(){
   return (
     <>
-      <Navbar /> 
-      <MovieList />
+      <Navbar  cartCount={this.state.cartCount}/> 
+      <MovieList 
+      movies={this.state.movies}
+      addStars={this.handleAddStar}
+      decreaseStars={this.handleDecreaseStar}
+      cartCounter={this.handleCartCount}
+      toggleFavourite={this.handleFavourite}
+       />
     </>
    
   );

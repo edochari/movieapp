@@ -5,13 +5,15 @@ class MovieList extends Component{
    
 
     render(){
-        const {movies}=this.state;
+        const {movies,addStars,decreaseStars,cartCounter,toggleFavourite}=this.props;
        return (
         <>
         {movies.map((movie)=> <MovieCard movies={movie} 
-        addStars={this.handleAddStar} 
-        decreaseStars={this.handleDecreaseStar} 
-        toggleButtons={this.handleTogglingButtons}/>)}
+        addStars={addStars} 
+        decreaseStars={decreaseStars} 
+        cartCounter={cartCounter}
+        toggleFavourite={toggleFavourite}
+        key={movie.id}/>)}
          
         
         </>
